@@ -1,9 +1,12 @@
 using CASInterface
 using CCAS
 
-const LIBCAS = @windows ? Pkg.dir("CCAS/libcas0.10.1/lib/libcas.dll") : @linux ? Pkg.dir("CCAS/libcas0.10.1/lib/libcas.so") : error("OS not supported")
+using Compat
+import Compat.ASCIIString
+
+const LIBCAS = is_windows() ? Pkg.dir("CCAS/libcas0.10.1/lib/libcas.dll") : is_linux() ? Pkg.dir("CCAS/libcas0.10.1/lib/libcas.so") : error("OS not supported")
 const LIBCAS_CONFIG = Pkg.dir("CCAS/libcas0.10.1/parameters/0.10.1.standard.r15mtf.tcas.xa.config.txt")
-const LIBCAS_R14 = @windows ? Pkg.dir("CCAS/libcas0.9.3/lib/libcas.dll") : @linux ? Pkg.dir("CCAS/libcas0.9.3/lib/libcas.so") : error("OS not supported")
+const LIBCAS_R14 = is_windows() ? Pkg.dir("CCAS/libcas0.9.3/lib/libcas.dll") : is_linux() ? Pkg.dir("CCAS/libcas0.9.3/lib/libcas.so") : error("OS not supported")
 const LIBCAS_CONFIG_R14 = Pkg.dir("CCAS/libcas0.9.3/parameters/0.9.3.standard.r14.xa.config.txt")
 
 function set_input_coc!(input::Input)
