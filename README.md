@@ -20,6 +20,19 @@ Dependencies:
   1. CCAS/libcas0.10.1/lib to contain the dll or so binary library.
 1. Edit the configuration file to use the absolute paths to the dependent parameter files. 
 
+## Testing your installation of CCAS:
+
+1. Start a Julia session at CCAS/test
+1. include("runtests.jl")
+1. runtest(libcas, libcas_config), where libcas is path to libcas dynamic library, and libcas_config is path to main parameter file.
+1. It should complete without errors and you should see author information, libcas version, some ACAS X output (including dh_min=-9999.0, dh_max=9999.0), No Errors, and Done! 
+
+## Troubleshooting
+
+* If you're on Windows and it complains about dll problems, use Dependency Walker to see what dependencies are missing.  You may need the appropriate Microsoft Visual C++ redistributables.
+* If you're able to open libcas.dll but then it fails saying it can't find one of the configuration tables, check that it can find your main configuration file, and also check the paths inside your main configuration file.  Try absolute paths.
+
+
 ## Building libccas from source
 
 Dependencies:
@@ -41,12 +54,6 @@ Note: If cmake isn't able to automatically detect your boost installation, try s
 1. make
 1. make install
 
-Testing your installation of CCAS:
-
-1. Start a Julia session at CCAS/test
-1. include("runtests.jl")
-1. runtest(libcas, libcas_config), where libcas is path to libcas dynamic library, and libcas_config is path to main parameter file.
-1. It should complete without errors and you should see author information, libcas version, some ACAS X output (including dh_min=-9999.0, dh_max=9999.0), No Errors, and Done! 
 
 ## Directory Structure
 ```
