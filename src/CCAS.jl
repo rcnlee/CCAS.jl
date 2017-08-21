@@ -296,7 +296,11 @@ type CASShared
     obj.input = InputRef(obj.max_intruders)
     obj.output = OutputRef(obj.max_intruders)
 
-    finalizer(obj,obj->ccall((:delCCASShared, LIBCCAS),Void, (Ptr{Void},),obj.handle))
+    finalizer(obj, x->begin
+        ccall((:delCCASShared, LIBCCAS),Void, (Ptr{Void},), x.handle)
+        println("CCAS finalizer called")
+    end)
+
     return obj
   end
 end
